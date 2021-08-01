@@ -75,8 +75,7 @@ const submissions = mongoose.Schema({
     },
     Q17 : {
         type: String,
-        required: true,
-        unique: true
+        required: true
     },
     Q18 : {
         type: String,
@@ -92,7 +91,8 @@ const submissions = mongoose.Schema({
     },
     Q21 : {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     Q22 : {
         type: String,
@@ -107,43 +107,6 @@ const submissions = mongoose.Schema({
         required: true
     },
     Q25 : {
-        type: String,
-        required: true
-    },
-    Q26 : {
-        type: String,
-        required: true
-    },
-    Q27 : {
-        type: String,
-        required: true
-    },
-    Q28 : {
-        type: String,
-        required: true
-    },
-    Q29 : {
-        type: String,
-        required: true
-    },
-    Q30 : {
-        type: String,
-        required: true,
-        unique: true
-    },
-    Q31 : {
-        type: String,
-        required: true
-    },
-    Q32 : {
-        type: String,
-        required: true
-    },
-    Q33 : {
-        type: String,
-        required: true
-    },
-    Q34 : {
         type: String,
         required: true
     }

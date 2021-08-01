@@ -29,16 +29,7 @@ router.post("/submit",async(req,res)=>{
             Q22: req.body.Q22,
             Q23: req.body.Q23,
             Q24: req.body.Q24,
-            Q25: req.body.Q25,
-            Q26: req.body.Q26,
-            Q27: req.body.Q27,
-            Q28: req.body.Q28,
-            Q29: req.body.Q29,
-            Q30: req.body.Q30,
-            Q31: req.body.Q31,
-            Q32: req.body.Q32,
-            Q33: req.body.Q33,
-            Q34: req.body.Q34
+            Q25: req.body.Q25
         })
     try{
         const submit = await newsubmit.save()
