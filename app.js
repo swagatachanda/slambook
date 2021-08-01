@@ -1,5 +1,6 @@
 const express = require("express")
 const app = express()
+const Apiroutes = require("./routes/apiroutes")
 //library inmports
 require("dotenv/config")
 const mongoose = require("mongoose")
@@ -17,6 +18,8 @@ app.enable("trust proxy")
 
 //middleware
 app.use(express.json())
+app.use("/api",Apiroutes)
+
 //routes
 
 //mongo connection
