@@ -18,7 +18,9 @@ app.enable("trust proxy")
 //middleware
 app.use(express.json())
 //routes
-
+app.get("/", (req, res) => {
+	res.render("questions")
+})
 //mongo connection
 mongoose.connect(process.env.DB_CONNECTION, {
 	useNewUrlParser: true,
