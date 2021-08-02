@@ -8,7 +8,8 @@ const start = () => {
 	document
 		.querySelector(".container")
 		.insertAdjacentHTML("beforeend", `<div class="questions-container"></div>`)
-	next(0)
+	finished()
+	//next(0)
 }
 const hightlight = (elem) => {
 	elem.style.borderBottom = "2px solid #000"
@@ -32,17 +33,25 @@ const finished = () => {
         `
 	)
 }
-
-const next = (index) => {
+const checkPhn = async (number) => {
+	const response = await fetch(
+		`${window.location.origin}/api/check/phone/${number}`
+	)
+	const body = await response.json()
+	if (response.status != 200) {
+		alert(`${body.error}`)
+		return false
+	}
+	return true
+}
+const next = async (index) => {
 	if (index > 0) {
 		var content = document.querySelector(`.answer.a${index - 1}`).innerHTML
 		if (content.trim() === "") {
 			alert("Fill up the question")
 			return
 		}
-		var phnVer = /^[0-9]{9}[0-9]$/
-		if (index === 3 && !phnVer.test(content)) {
-			alert("Not a valid phone number")
+		if (index === 3 && !(await checkPhn(content))) {
 			return
 		}
 		entry[`Q${index}`] = content
@@ -99,7 +108,7 @@ const submit = async () => {
 	if (status === 500) {
 		alert("Failed!! Try Again!!")
 	} else {
-		finshed()
+		finished()
 		console.log("Done!!!")
 	}
 }

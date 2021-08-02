@@ -53,6 +53,10 @@ router.get("/submission", async (req, res) => {
 })
 
 router.get("/check/phone/:Q3", async (req, res) => {
+	var phnVer = /^[0-9]{9}[0-9]$/
+	if (!phnVer.test(req.params.Q3)) {
+		return res.status(400).json({ error: "Not a valid Phone Number" })
+	}
 	try {
 		const response = await Submission.findOne({ Q3: req.params.Q3 })
 		if (response == null) {
