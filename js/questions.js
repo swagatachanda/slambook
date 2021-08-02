@@ -8,8 +8,7 @@ const start = () => {
 	document
 		.querySelector(".container")
 		.insertAdjacentHTML("beforeend", `<div class="questions-container"></div>`)
-	finished()
-	//next(0)
+	next(0)
 }
 const hightlight = (elem) => {
 	elem.style.borderBottom = "2px solid #000"
