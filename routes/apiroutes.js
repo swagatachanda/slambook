@@ -3,53 +3,39 @@ const router = express.Router()
 const Submission = require("../model/submissions")
 
 router.post("/submit", async (req, res) => {
-	console.log(req.body)
-	const newsubmit = new Submission({
-		Q1: req.body.Q1,
-		Q2: req.body.Q2,
-		Q3: req.body.Q3,
-		Q4: req.body.Q4,
-		Q5: req.body.Q5,
-		Q6: req.body.Q6,
-		Q7: req.body.Q7,
-		Q8: req.body.Q8,
-		Q9: req.body.Q9,
-		Q10: req.body.Q10,
-		Q11: req.body.Q11,
-		Q12: req.body.Q12,
-		Q13: req.body.Q13,
-		Q14: req.body.Q14,
-		Q15: req.body.Q15,
-		Q16: req.body.Q16,
-		Q17: req.body.Q17,
-		Q18: req.body.Q18,
-		Q19: req.body.Q19,
-		Q20: req.body.Q20,
-		Q21: req.body.Q21,
-		Q22: req.body.Q22,
-		Q23: req.body.Q23,
-		Q24: req.body.Q24,
-		Q25: req.body.Q25,
-		submissiontime: req.body.submissiontime,
+	const fields = []
+	for (i = 0; i < 25; i++) {
+		fields.push(`Q${i + 1}`)
+	}
+	data = {}
+	fields.map((item) => {
+		data[`${item}`] = req.body[`${item}`]
 	})
+	for (item in data) {
+		if (data[`${item}`] === undefined) {
+			return res.status(400).json({
+				errorMessage: `Please fill the required field`,
+			})
+		}
+		if (item == "Q3") {
+			const testcase = /^\d{10}$/.test(data[`${item}`])
+			if (!testcase) {
+				return res.status(403).json({
+					errorMessage: "Please provide a valid phone number",
+				})
+			}
+		}
+	}
+	const newsubmit = new Submission(data)
 	try {
 		const submit = await newsubmit.save()
 		res.status(200).json({
 			data: submit,
 		})
 	} catch (err) {
-		if (err.name === "MongoError" && err.code === 11000) {
-			res.status(501).json({
-				errorName: err.name,
-				error: "Unique value is required",
-				errorOccured: err.keyValue,
-			})
-		} else {
-			res.status(501).json({
-				errorName: err.name,
-				error: err.errors[Object.keys(err.errors)[0]].message,
-			})
-		}
+		res.status(501).json({
+			errorMessage: "database problem",
+		})
 	}
 })
 
@@ -61,21 +47,22 @@ router.get("/submission", async (req, res) => {
 		})
 	} catch (err) {
 		res.status(501).json({
-			errorMessage: err,
+			errorMessage: "database problem",
 		})
 	}
 })
 
-router.post("/checkphonenumber", async (req, res) => {
+router.get("/check/phone/:Q3", async (req, res) => {
 	try {
-		const response = await Submission.find({ Q3: req.body.Q3 })
-		if (response.length == 0) {
-			res.json({ status: true, data: response })
-		} else {
-			res.json({ status: false, data: response })
+		const response = await Submission.findOne({ Q3: req.params.Q3 })
+		if (response == null) {
+			return res.status(200).json({ isPresent: false })
 		}
+		return res
+			.status(400)
+			.json({ error: "Phone Number already present", isPresent: true })
 	} catch (err) {
-		console.log(err)
+		return res.status(500).json({ error: "Database Error" })
 	}
 })
 
@@ -84,12 +71,16 @@ router.get("/submission/:submissionId", async (req, res) => {
 		const submission = await Submission.findById(req.params.submissionId)
 		if (submission == null) {
 			return res.status(404).json({
-				error: "Submission not found",
+				errorMessage: "Submission not found",
 			})
 		}
-		res.json({ status: true, data: submission })
+		return res.status(200).json({
+			data: submission,
+		})
 	} catch (err) {
-		res.json({ status: false, error: err, code: 104 })
+		res.status(501).json({
+			errorMessage: "database problem",
+		})
 	}
 })
 
