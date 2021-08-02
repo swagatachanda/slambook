@@ -28,6 +28,9 @@ body {
 .logo {
 	color: #ffff3f;
 }
+.nav-name:hover, .logo:hover{
+	cursor: pointer;
+}
 .container {
 	display: flex;
 	justify-content: center;
@@ -140,6 +143,7 @@ body {
 }
 .answer.page {
 	border-bottom: none;
+	font-weight: bold;
 }
 .animated,
 .img-svg {
@@ -196,6 +200,7 @@ body {
 		height: fit-content;
 	}
 	.container.individual {
+		background-image: url("/heart2.png");
 		background-size: contain;
 		background-repeat: repeat-y;
 	}

@@ -99,13 +99,11 @@ const submit = async () => {
 		headers: { "Content-Type": "application/json;charset=utf-8" },
 		body: JSON.stringify(entry),
 	})
-	console.log(response)
 	var status = response.status
-	console.log(status)
 	const back_data = await response.json()
-	console.log(back_data)
 	if (status === 500) {
 		alert("Failed!! Try Again!!")
+		return 
 	} else {
 		finished()
 		console.log("Done!!!")

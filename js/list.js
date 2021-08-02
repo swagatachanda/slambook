@@ -1,7 +1,7 @@
 const data = [
 	"What is your name?",
 	"Your nickname",
-	"Your phone number",
+	"Your mobile number",
 	"Where do you stay?",
 	"When did you cry for the first time?",
 	"What is your favourite colour?",
@@ -15,7 +15,7 @@ const data = [
 	"Describe your soul mate",
 	"Do you believe in love? Why or why not?",
 	"Who is/was your celebrity crush on a TV character when you were a teenager?",
-	"Favorite Vacation Spots and your dream destination",
+	"Favorite Vacation Spots and your Dream Destination",
 	"Your crush in real life",
 	"If you are given another chance to live your life. What are the 3 things will you do or like to change?",
 	"Who is your role model/heart throb?",

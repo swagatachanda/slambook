@@ -20,7 +20,7 @@ const getAllData = async () => {
 			"beforeend",
 			`<div class="sub s${index}" onclick="sub(${index})">
                     <div class="sub-name sm${index}">${eachSub.Q1}</div>
-                    <div class="sub-time st${index}">12.03.2012 12:23pm</div>
+                    <div class="sub-time st${index}">${new Date(eachSub.submissiontime).toLocaleString()}</div>
             </div>`
 		)
 	})
