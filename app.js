@@ -18,11 +18,17 @@ app.enable("trust proxy")
 
 //middleware
 app.use(express.json())
-app.use("/api",Apiroutes)
+app.use("/api", Apiroutes)
 
 //routes
 app.get("/", (req, res) => {
 	res.render("questions")
+})
+app.get("/momo", (req, res) => {
+	res.render("admin")
+})
+app.get("/momo/:subId", (req, res) => {
+	res.render("individual", { subId: req.params.subId })
 })
 //mongo connection
 mongoose.connect(process.env.DB_CONNECTION, {
