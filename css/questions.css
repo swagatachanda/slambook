@@ -24,11 +24,13 @@ body {
 }
 .right > div {
 	margin-left: 20px;
+	user-select: none;
 }
 .logo {
 	color: #ffff3f;
 }
-.nav-name:hover, .logo:hover{
+.nav-name:hover,
+.logo:hover {
 	cursor: pointer;
 }
 .container {
@@ -168,6 +170,7 @@ body {
 	font-family: "Itim", cursive;
 	font-size: 1.3rem;
 	background-color: #ddb892;
+	user-select: none;
 }
 .sub:hover {
 	cursor: pointer;
