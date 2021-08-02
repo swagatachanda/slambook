@@ -91,7 +91,6 @@ const submissions = mongoose.Schema({
 	Q21: {
 		type: String,
 		required: true,
-		unique: true,
 	},
 	Q22: {
 		type: String,
@@ -107,6 +106,11 @@ const submissions = mongoose.Schema({
 	},
 	Q25: {
 		type: String,
+		required: true,
+	},
+	submissiontime: {
+		type: Date,
+		default: new Date(),
 		required: true,
 	},
 })

@@ -30,6 +30,7 @@ router.post("/submit", async (req, res) => {
 		Q23: req.body.Q23,
 		Q24: req.body.Q24,
 		Q25: req.body.Q25,
+		submissiontime: req.body.submissiontime,
 	})
 	try {
 		const submit = await newsubmit.save()
@@ -65,6 +66,19 @@ router.get("/submission", async (req, res) => {
 	}
 })
 
+router.post("/checkphonenumber", async (req, res) => {
+	try {
+		const response = await Submission.find({ Q3: req.body.Q3 })
+		if (response.length == 0) {
+			res.json({ status: true, data: response })
+		} else {
+			res.json({ status: false, data: response })
+		}
+	} catch (err) {
+		console.log(err)
+	}
+})
+
 router.get("/submission/:submissionId", async (req, res) => {
 	try {
 		const submission = await Submission.findById(req.params.submissionId)
@@ -73,11 +87,9 @@ router.get("/submission/:submissionId", async (req, res) => {
 				error: "Submission not found",
 			})
 		}
-		res.status(200).json({ status: true, data: submission })
+		res.json({ status: true, data: submission })
 	} catch (err) {
-		res
-			.status(500)
-			.json({ status: false, error: err.message, errDetails: err, code: 104 })
+		res.json({ status: false, error: err, code: 104 })
 	}
 })
 
