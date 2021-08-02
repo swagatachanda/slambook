@@ -29,7 +29,8 @@ router.post("/submit",async(req,res)=>{
             Q22: req.body.Q22,
             Q23: req.body.Q23,
             Q24: req.body.Q24,
-            Q25: req.body.Q25
+            Q25: req.body.Q25,
+            submissiontime : req.body.submissiontime
         })
     try{
         const submit = await newsubmit.save()
@@ -66,6 +67,22 @@ router.get("/submission", async(req,res)=>{
         res.status(501).json({
             errorMessage: err
         })
+    }
+})
+
+
+router.post("/checkphonenumber", async(req,res)=>{
+    try{
+        const response = await Submission.find({'Q3':req.body.Q3})
+        if(response.length==0){
+            res.json({'status' : true, 'data' : response})
+        }
+        else{
+            res.json({'status' : false, 'data' : response})
+        }
+    }
+    catch(err){
+        console.log(err)
     }
 })
 
