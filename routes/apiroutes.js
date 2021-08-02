@@ -38,9 +38,20 @@ router.post("/submit",async(req,res)=>{
         })
     }
     catch(err){
-        res.status(500).json({
-            errorMessage : err,
-        })
+        if(err.name==='MongoError' && err.code===11000)
+        {
+            res.status(501).json({
+                 errorName : err.name,
+                 error : "Unique value is required",
+                 errorOccured : err.keyValue
+            })
+         }
+        else{
+            res.status(501).json({
+                errorName : err.name,
+                error : err.errors[Object.keys(err.errors)[0]].message
+            })
+        }
     }
 })
 

@@ -17,7 +17,7 @@ const submissions = mongoose.Schema({
             validator : (value)=>{
                 return validator.isMobilePhone(value)
             },
-            message : "Provide a valid phone number"
+            message : ("Provide a valid phone number")
         }
     },
     Q4 : {
@@ -25,8 +25,7 @@ const submissions = mongoose.Schema({
         required: true
     },
     Q5 : {
-        type: Date,
-        default: new Date(),
+        type: String,
         required: true
     },
     Q6 : {
