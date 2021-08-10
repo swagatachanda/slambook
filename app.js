@@ -37,5 +37,5 @@ mongoose.connect(process.env.DB_CONNECTION, {
 	useCreateIndex: true,
 	useFindAndModify: false,
 })
-//app listen
+//app listens
 app.listen(process.env.PORT || 3000)
